@@ -16,6 +16,10 @@ body {
   margin: 50px auto;
 }
 
+header {
+  position: relative;
+}
+
 header .logo {
   font-weight: 600;
   font-size: 20px;
@@ -69,6 +73,29 @@ header .presentation::before {
   font-size: 15px;
   font-weight: 300;
   color: #fff;
+}
+
+header .shopping-cart-button {
+  float: right;
+  cursor: pointer;
+  transition: color, transform .5s ease;
+}
+
+header .shopping-cart-button:hover,
+header .shopping-cart-button.active {
+  color: #dc3d3d;
+  transform: scale(1.3);
+}
+
+header .shop-cart {
+  position: absolute;
+  top: 30px;
+  right: 0px;
+  width: 450px;
+  min-height: 100px;
+  background-color: #fafafa;
+  box-shadow: 4px 5px 15px -7px #606060;
+  z-index: 10;
 }
 
 main {
