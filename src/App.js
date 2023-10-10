@@ -8,18 +8,33 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      orders: [],
       items: items
     }
+    this.addToOrder = this.addToOrder.bind(this);
   }
   render() {
     return (
       <div className="wrapper">
-        <Header />
-        <Items items={this.state.items} />
+        <Header orders={this.state.orders} />
+        <Items items={this.state.items} onAdd={this.addToOrder} />
         <Footer />
       </div>
     );
   }
+
+  addToOrder(item) {
+    let isInArray = false;
+    this.state.orders.forEach(el => {
+      if (el.id === item.id) {
+        isInArray = true;
+      }
+    })
+    if (!isInArray) {
+      this.setState({ orders: [...this.state.orders, item] })
+    }
+  }
+
 }
 
 export default App;

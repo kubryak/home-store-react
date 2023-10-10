@@ -8,7 +8,7 @@ export class Item extends Component {
         <h2>{this.props.item.title}</h2>
         <p>{this.props.item.description}</p>
         <strong>{this.props.item.price.toLocaleString('ru-RU')}₽</strong>
-        <div className='add-to-cart'>+</div>
+        <div className='add-to-cart' onClick={() => this.props.onAdd(this.props.item)}>+</div>
       </div>
     )
   }
