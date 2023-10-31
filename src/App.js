@@ -4,6 +4,7 @@ import Footer from "./components/Footer";
 import Items from "./components/Items";
 import items from "./variables/itemsData"
 import Categories from "./components/Categories";
+import ShowFullItem from "./components/ShowFullItem";
 
 class App extends React.Component {
   constructor(props) {
@@ -11,22 +12,35 @@ class App extends React.Component {
     this.state = {
       orders: [],
       currentItems: [],
-      items: items
+      items: items,
+      showFullItem: false,
+      fullItem: {},
     }
     this.state.currentItems = this.state.items;
     this.addToOrder = this.addToOrder.bind(this);
     this.deleteOrder = this.deleteOrder.bind(this);
     this.chooseCategory = this.chooseCategory.bind(this);
+    this.onShowItem = this.onShowItem.bind(this);
   }
   render() {
     return (
       <div className="wrapper">
         <Header orders={this.state.orders} onDelete={this.deleteOrder} />
         <Categories chooseCategory={this.chooseCategory} />
-        <Items items={this.state.currentItems} onAdd={this.addToOrder} />
+        <Items
+          items={this.state.currentItems}
+          onAdd={this.addToOrder}
+          onShowItem={this.onShowItem}
+        />
+        {this.state.showFullItem && <ShowFullItem item={this.state.fullItem} onAdd={this.addToOrder} onShowItem={this.onShowItem} />}
         <Footer />
       </div>
     );
+  }
+
+  onShowItem(item) {
+    this.setState({ fullItem: item })
+    this.setState({ showFullItem: !this.state.showFullItem })
   }
 
   chooseCategory(category) {
